@@ -86,16 +86,14 @@ const JobList = () => {
     setSearchValue(inputText);
   };
 
-  console.log({ loading, data, error });
-
   const { jobs } = data;
   return (
       <Container className={classes.root} maxWidth={false}>
         <Grid container
-                spacing={3}
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start">
+              spacing={3}
+              direction="row"
+              justify="flex-start"
+              alignItems="flex-start">
           <Grid item key="filter" lg={12} sm={12} xl={12} xs={12}>
             <InputBase
               className={classes.input}
@@ -146,7 +144,6 @@ const Logo = () => {
 };
 
 const App = () => {
-  console.log({ JobList });
   return (
     <ThemeProvider theme={theme}>
       <AppBar>
