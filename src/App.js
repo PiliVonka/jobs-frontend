@@ -23,8 +23,6 @@ import {
   LocationOn
 } from "@material-ui/icons";
 
-import { Spin } from "antd";
-
 import gql from "graphql-tag";
 
 import { useQuery } from "@apollo/react-hooks";
@@ -63,10 +61,12 @@ const JobList = () => {
   const [inputText, setInputText] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const { loading, error, data } = useQuery(GET_JOBS, { variables: { searchValue } });
-
+  console.log({ loading, error, data });
   if (loading || (!data && !error)) {
     return (
-      <Spin />
+      <Typography>
+        {"Loading.."}
+      </Typography>
     );
   }
 
@@ -88,54 +88,61 @@ const JobList = () => {
 
   const { jobs } = data;
   return (
-      <Container className={classes.root} maxWidth={false}>
-        <Grid container
-              spacing={3}
-              direction="row"
-              justify="flex-start"
-              alignItems="flex-start">
-          <Grid item key="filter" lg={12} sm={12} xl={12} xs={12}>
-            <InputBase
-              className={classes.input}
-              placeholder="Поиск"
-              inputProps={{ "aria-label": "search" }}
-              onChange={onTextChange}
-              value={inputText}
-            />
-            <IconButton
-              onClick={clickSearch}
-              type="submit"
-              className={classes.iconButton}
-              aria-label="search">
-              <Search />
-            </IconButton>
-          </Grid>
-          {jobs.map(job => (
-            <Grid item key={job.id} lg={4} sm={4} xl={4} xs={12}>
-              <Card minHeight={800}>
-                <CardHeader
-                  title={job.title}
-                  subheader={job.created}
-                />
-                <CardContent>
-                  <Typography component="p">
-                    {job.description}
-                  </Typography>
-                  <Typography variant="caption">
-                    <Phone />
-                    {job.phone}
-                  </Typography>
-                  <Divider orientation="vertical" />
-                  <Typography variant="caption">
-                    <LocationOn />
-                    {job.location}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+    <Container>
+    <AppBar>
+    <Toolbar>
+      <Logo />
+    </Toolbar>
+    </AppBar>
+    <Container className={classes.root} maxWidth={false}>
+      <Grid container
+            spacing={3}
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-start">
+        <Grid item key="filter" lg={12} sm={12} xl={12} xs={12}>
+          <InputBase
+            className={classes.input}
+            placeholder="Поиск"
+            inputProps={{ "aria-label": "search" }}
+            onChange={onTextChange}
+            value={inputText}
+          />
+          <IconButton
+            onClick={clickSearch}
+            type="submit"
+            className={classes.iconButton}
+            aria-label="search">
+            <Search />
+          </IconButton>
         </Grid>
-      </Container>
+        {jobs.map(job => (
+          <Grid item key={job.id} lg={4} sm={4} xl={4} xs={12}>
+            <Card>
+              <CardHeader
+                title={job.title}
+                subheader={job.created}
+              />
+              <CardContent>
+                <Typography component="p">
+                  {job.description}
+                </Typography>
+                <Typography variant="caption">
+                  <Phone />
+                  {job.phone}
+                </Typography>
+                <Divider orientation="vertical" />
+                <Typography variant="caption">
+                  <LocationOn />
+                  {job.location}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+    </Container>
   );
 };
 
@@ -146,11 +153,6 @@ const Logo = () => {
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <AppBar>
-        <Toolbar>
-          <Logo />
-        </Toolbar>
-      </AppBar>
       <JobList />
     </ThemeProvider>
   );

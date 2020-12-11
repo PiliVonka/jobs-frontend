@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import App from "./App";
 
-import ApolloClient from "apollo-boost";
+const { REACT_APP_BACKEND_API } = process.env;
+console.log({ REACT_APP_BACKEND_API });
 
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
+  uri: REACT_APP_BACKEND_API,
+
   credentials: "include",
+  cache: new InMemoryCache(),
   onError: ({ graphQLErrors, networkError, reponse }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
