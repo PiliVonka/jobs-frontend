@@ -1,11 +1,14 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme, colors } from "@material-ui/core";
 
 const theme = createMuiTheme({
   palette: {
+    background: {
+      dark: colors.common.white,
+      default: colors.common.white,
+      paper: colors.indigo[50]
+    },
     primary: {
-      light: "#63ccff",
-      main: "#009be5",
-      dark: "#006db3",
+      main: colors.indigo[800]
     },
   },
   typography: {

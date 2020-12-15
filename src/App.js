@@ -7,7 +7,7 @@ import {
   Card,
   CardHeader,
   CardContent,
-  InputBase,
+  TextField,
   IconButton,
   makeStyles,
   colors,
@@ -52,7 +52,11 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(10),
     color: colors.red
-  }
+  },
+  searchInput: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
 }));
 
 const JobList = () => {
@@ -61,7 +65,6 @@ const JobList = () => {
   const [inputText, setInputText] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const { loading, error, data } = useQuery(GET_JOBS, { variables: { searchValue } });
-  console.log({ loading, error, data });
   if (loading || (!data && !error)) {
     return (
       <Typography>
@@ -100,10 +103,13 @@ const JobList = () => {
             direction="row"
             justify="flex-start"
             alignItems="flex-start">
-        <Grid item key="filter" lg={12} sm={12} xl={12} xs={12}>
-          <InputBase
-            className={classes.input}
-            placeholder="Поиск"
+        <Grid fullWidth item key="filter" lg={12} sm={12} xl={12} xs={12}>
+          <TextField
+            className={classes.searchInput}
+            placeholder="Программист"
+            onKeyPress={e => e.key === "Enter" ? clickSearch() : null}
+            label="Поиск"
+            variant="outlined"
             inputProps={{ "aria-label": "search" }}
             onChange={onTextChange}
             value={inputText}
@@ -117,23 +123,23 @@ const JobList = () => {
           </IconButton>
         </Grid>
         {jobs.map(job => (
-          <Grid item key={job.id} lg={4} sm={4} xl={4} xs={12}>
+          <Grid item key={job.id} lg={12} sm={12} xl={12} xs={12}>
             <Card>
               <CardHeader
                 title={job.title}
-                subheader={job.created}
+                subheader={job.jobDate ? job.jobDate : "сегодня"}
               />
               <CardContent>
                 <Typography component="p">
                   {job.description}
                 </Typography>
                 <Typography variant="caption">
-                  <Phone />
+                  <Phone color="primary" />
                   {job.phone}
                 </Typography>
                 <Divider orientation="vertical" />
                 <Typography variant="caption">
-                  <LocationOn />
+                  <LocationOn color="secondary"/>
                   {job.location}
                 </Typography>
               </CardContent>
@@ -147,7 +153,7 @@ const JobList = () => {
 };
 
 const Logo = () => {
-  return <img alt="Logo" src="/static/newlogo.png" width="65" height="65"/>;
+  return <img alt="Logo" src={`${process.env.PUBLIC_URL}/logo192.png`} width="65" height="65"/>;
 };
 
 const App = () => {
