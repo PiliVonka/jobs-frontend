@@ -7,8 +7,11 @@ COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
 
-EXPOSE 5000
+RUN npm run build
 
 RUN npm install -g serve
 
-CMD ["serve", "-s", "build/"]
+EXPOSE 3000
+
+CMD ["serve", "-l", "3000", "-s", "build/"]
+

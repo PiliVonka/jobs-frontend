@@ -8,7 +8,7 @@ const theme = createMuiTheme({
       paper: colors.indigo[50]
     },
     primary: {
-      main: colors.indigo[800]
+      main: colors.indigo[500]
     },
   },
   typography: {

@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import App from "./App";
 
 const { REACT_APP_BACKEND_API } = process.env;
+console.log({ REACT_APP_BACKEND_API });
 
 const client = new ApolloClient({
   uri: REACT_APP_BACKEND_API,
