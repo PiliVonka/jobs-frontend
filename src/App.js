@@ -7,7 +7,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  IconButton,
   makeStyles,
   colors,
   ThemeProvider,
@@ -157,13 +156,8 @@ const JobList = () => {
       <Logo />
         <div className={classes.search}>
         <div className={classes.searchIcon}>
-        <Search />
-            <IconButton
-                onClick={clickSearch}
-                type="submit"
-                aria-label="search">
-              </IconButton>
-            </div>
+            <Search />
+             </div>
             <InputBase
               placeholder="Программист"
               inputProps={{ "aria-label": "search" }}
@@ -181,45 +175,45 @@ const JobList = () => {
         </div>
     </Toolbar>
     </AppBar>
-    <Container className={classes.root} maxWidth={false}>
-        {jobs && jobs.length && <InfiniteScroll
-            pageStart={0}
-            loadMore={loadMoreJobs}
-            hasMore={true || false}
-            loader={<div className="loader" key={0}>Loading ...</div>}>
-        <Grid container
-            spacing={3}
-            direction="row"
-            justify="flex-start"
-            alignItems="flex-start">
-          {jobs.map(job => (
-            <Grid item key={job.id} lg={12} sm={12} xl={12} xs={12}>
-              <Card>
-                <CardHeader
-                  title={job.title}
-                  subheader={job.jobDate}
-                />
-                <CardContent>
-                  <Typography component="p">
-                    {job.description}
-                  </Typography>
-                  <Typography variant="caption">
-                    <Phone color="primary" />
-                    {job.phone}
-                  </Typography>
-                  <Divider orientation="vertical" />
-                  <Typography variant="caption">
-                    <LocationOn color="secondary"/>
-                    {job.location}
-                  </Typography>
-                </CardContent>
-              </Card>
+      <Container className={classes.root} maxWidth={false}>
+          {jobs && jobs.length && <InfiniteScroll
+              pageStart={0}
+              loadMore={loadMoreJobs}
+              hasMore={true || false}
+              loader={<div className="loader" key={0}>Loading ...</div>}>
+          <Grid container
+              spacing={3}
+              direction="row"
+              justify="flex-start"
+              alignItems="flex-start">
+            {jobs.map(job => (
+              <Grid item key={job.id} lg={12} sm={12} xl={12} xs={12}>
+                <Card>
+                  <CardHeader
+                    title={job.title}
+                    subheader={job.jobDate}
+                  />
+                  <CardContent>
+                    <Typography component="p">
+                      {job.description}
+                    </Typography>
+                    <Typography variant="caption">
+                      <Phone color="primary" />
+                      {job.phone}
+                    </Typography>
+                    <Divider orientation="vertical" />
+                    <Typography variant="caption">
+                      <LocationOn color="secondary"/>
+                      {job.location}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
             </Grid>
-          ))}
-          </Grid>
-        </InfiniteScroll>
-      }
-    </Container>
+          </InfiniteScroll>
+        }
+      </Container>
     </Container>
   );
 };
