@@ -148,7 +148,7 @@ const JobList = () => {
   const clickSearch = () => {
     setSearchValue(inputText);
   };
-
+  console.log({ jobs });
   return (
     <Container>
     <AppBar>
@@ -191,7 +191,7 @@ const JobList = () => {
                 <Card>
                   <CardHeader
                     title={job.title}
-                    subheader={job.jobDate}
+                    subheader={new Date(parseInt(job.created)).toLocaleString("ru-RU")}
                   />
                   <CardContent>
                     <Typography component="p">
