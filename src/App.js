@@ -21,7 +21,9 @@ import { fade } from "@material-ui/core/styles";
 import {
   Search,
   Phone,
-  LocationOn
+  LocationOn,
+  Instagram,
+  Android
 } from "@material-ui/icons";
 
 import InfiniteScroll from "react-infinite-scroller";
@@ -155,9 +157,9 @@ const JobList = () => {
     <Toolbar>
       <Logo />
         <div className={classes.search}>
-        <div className={classes.searchIcon}>
-            <Search />
-             </div>
+            <div className={classes.searchIcon}>
+              <Search />
+            </div>
             <InputBase
               placeholder="Программист"
               inputProps={{ "aria-label": "search" }}
@@ -171,7 +173,10 @@ const JobList = () => {
               label="Поиск"
               variant="outlined"
             />
-
+        </div>
+        <div>
+          <Instagram />
+          <Android />
         </div>
     </Toolbar>
     </AppBar>
